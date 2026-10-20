@@ -1,0 +1,36 @@
+@startuml
+abstract class Emissor {
+  # {abstract} criarPassagem(passageiro, tarifa) : Passagem
+  + emitir(passageiro, tarifa) : void
+}
+class EmissorAereo
+class EmissorRodoviario
+class EmissorFerroviario
+
+abstract class Passagem {
+  # passageiro : String
+  # tarifa : double
+  + {abstract} getModal() : String
+  + {abstract} getTaxaEmbarque() : double
+  + {abstract} getDocumentos() : String
+  + getPassageiro() : String
+}
+class PassagemAerea
+class PassagemRodoviaria
+class PassagemFerroviaria
+class Main
+
+Emissor <|-- EmissorAereo
+Emissor <|-- EmissorRodoviario
+Emissor <|-- EmissorFerroviario
+Passagem <|-- PassagemAerea
+Passagem <|-- PassagemRodoviaria
+Passagem <|-- PassagemFerroviaria
+Emissor ..> Passagem : usa
+EmissorAereo ..> PassagemAerea : cria
+EmissorRodoviario ..> PassagemRodoviaria : cria
+EmissorFerroviario ..> PassagemFerroviaria : cria
+Main ..> EmissorAereo
+Main ..> EmissorRodoviario
+Main ..> EmissorFerroviario
+@enduml
